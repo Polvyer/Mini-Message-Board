@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  a(href="/new") New message
+  h1= title
+
+  ul
+    //
+      Don't read this
+    // You prob failed
+    //- I can only see this
+    each message in messages
+      li
+      - var timeSent = getTimeDiff(message.added);
+      - function getTimeDiff(date) { return Math.floor((new Date() - date) / 60000); };
+        #container
+          case timeSent
+            when 0
+              p.added less than a minute ago
+            when 1: p.added=`${timeSent} minute ago`
+            default
+              if Math.floor(timeSent / 60) <= 1
+                p.added=`${timeSent} minutes ago`
+              else
+                p.added=`${Math.floor(timeSent / 60)} hours ago`
+
+          p(class="text")= message.text
+          p(class="user")=`- ${message.user}`

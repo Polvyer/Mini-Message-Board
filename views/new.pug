@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  //- Declaration
+  mixin inp(holder='Default', name="Default")
+    input(placeholder=holder name=name)
+
+  - var url = "/"
+
+  a(href=url) Back
+
+  form(method="POST" action="/new")
+    h1(style={'font-size': '1.5rem'}).
+      #[q(lang="es") New message]
+    //- Use
+    +inp('Name', 'name')
+    +inp('Enter a message', 'messageText')
+    //- +inp
+    button Submit
